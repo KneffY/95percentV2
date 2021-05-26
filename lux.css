@@ -1,0 +1,268 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    --cyan--twinkle: 3px;
+    --magenta--twinkle: 3px;
+    --yellow--twinkle: 3px;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    overflow: hidden;
+    cursor: none;
+}
+
+/* THINGS */
+#cursor, #player, #player_core, #bullet, #life {
+    z-index: 2;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* STAGE################################################################################ */
+#stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 650px;
+    height: 650px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+#limit {
+    position: absolute;
+    width: 540px;
+    height: 540px;
+    border-radius: 50%;
+    border: 4px solid rgba(255, 255, 255, 0.3)
+}
+
+.color {
+    position: absolute;
+    width: 650px;
+    height: 650px;
+    border-radius: 50%;
+} 
+
+#cursor {
+    z-index: 4;
+    color: white;
+    font-size: 30px;
+    animation: cursorShadows 1.5s linear infinite;
+}
+
+#bullet {
+    z-index: 1;
+    font-size: 30px;
+} 
+
+.enemy {
+    z-index: 2;
+    position: absolute;
+}
+
+#life {
+    font-size: 30px;
+    animation: lifeShadows 1.5s linear infinite; 
+    /* cabiar */
+    color: white;
+}
+
+/* INTERFACE###################################################################### */
+#interface {
+    width: 400px;
+    height: 350px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: rgba(0, 0, 0, 0.9);
+    animation: interfaceShadows 1s linear infinite;
+}
+#score {
+    font-size: 90px;
+    width: 400px;
+    text-align: center;
+}
+#chances {
+    font-size: 180px;
+    width: 400px;
+    text-align: center;
+}
+
+/* PLAYER########################################################################## */
+
+#player {
+    position: absolute;
+    font-size: 50px;
+}
+#player_core {
+    position: absolute;
+    font-size: 45px;
+    color: black;
+    top: 3px;
+    left: 3px;
+}
+
+/* SHADOWS################################################################################## */
+
+#cyan {
+    box-shadow: var(--cyan--twinkle) 0 var(--cyan--twinkle) var(--cyan--twinkle) rgba(0, 255, 255, 0.5);
+    /* transform: rotate(90deg); */
+    animation: rotate 1.5s linear infinite, cyanTwinkle 3s linear infinite;
+}
+
+#magenta {
+    box-shadow: var(--magenta--twinkle) 0 var(--magenta--twinkle) var(--magenta--twinkle) rgba(255, 0, 255, 0.5);
+    /* transform: rotate(210deg); */
+    animation: rotate 1.25s linear infinite, magentaTwinkle 2.25s linear infinite;
+}
+
+#yellow {
+    box-shadow: var(--yellow--twinkle) 0 var(--yellow--twinkle) var(--yellow--twinkle) rgba(255, 255, 0, 0.5);
+    /* transform: rotate(330deg); */
+    animation: rotate 1s linear infinite, yellowTwinkle 1.5s linear infinite;
+}
+
+/* ANIMATIONS################################################################################################## */
+
+@keyframes rotate {
+    0% {
+        transform: rotate(90deg);
+    }
+    25% {
+        transform: rotate(180deg);
+    }
+    50% {
+        transform: rotate(270deg);
+    }
+    75% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(450deg);
+    }
+}
+
+@keyframes cyanTwinkle {
+    0% {
+        --cyan--twinkle: 3px;
+    }
+    25% {
+        --cyan--twinkle: 3.5px;
+    }
+    50% {
+        --cyan--twinkle: 2.5px;
+    }
+    75% {
+        --cyan--twinkle: 3.25px;
+    }
+    100% {
+        --cyan--twinkle: 3px;
+    }
+}
+
+@keyframes magentaTwinkle {
+    0% {
+        --magenta--twinkle: 3px;
+    }
+    25% {
+        --magenta--twinkle: 3.5px;
+    }
+    50% {
+        --magenta--twinkle: 2.5px;
+    }
+    75% {
+        --magenta--twinkle: 3.25px;
+    }
+    100% {
+        --magenta--twinkle: 3px;
+    }
+}
+
+@keyframes yellowTwinkle {
+    0% {
+        --yellow--twinkle: 3px;
+    }
+    25% {
+        --yellow--twinkle: 3.5px;
+    }
+    50% {
+        --yellow--twinkle: 2.5px;
+    }
+    75% {
+        --yellow--twinkle: 3.25px;
+    }
+    100% {
+        --yellow--twinkle: 3px;
+    }
+}
+
+@keyframes cursorShadows {
+    0% {
+        text-shadow: 0px 0px 20px rgba(0, 255, 255, 0.7);
+    } 
+    33% {
+        text-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
+    }
+    66% {
+        text-shadow: 0px 0px 20px rgba(255, 255, 0, 0.7);
+    }
+    100% {
+        text-shadow: 0px 0px 20px rgba(0, 255, 255, 0.7);
+    }
+}
+
+@keyframes playerShadows {
+    0% {
+        text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.7);
+    } 
+    33% {
+        text-shadow: 0px 0px 10px rgba(255, 0, 255, 0.7);
+    }
+    66% {
+        text-shadow: 0px 0px 10px rgba(255, 255, 0, 0.7);
+    }
+    100% {
+        text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.7);
+    }
+}
+
+@keyframes interfaceShadows {
+    0% {
+        text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.4);
+    } 
+    33% {
+        text-shadow: 0px 0px 10px rgba(255, 0, 255, 0.4);
+    }
+    66% {
+        text-shadow: 0px 0px 10px rgba(255, 255, 0, 0.4);
+    }
+    100% {
+        text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.4);
+    }
+}
+
+@keyframes lifeShadows {
+    0% {
+        text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.5);
+    } 
+    33% {
+        text-shadow: 0px 0px 10px rgba(255, 0, 255, 0.5);
+    }
+    66% {
+        text-shadow: 0px 0px 10px rgba(255, 255, 0, 0.5);
+    }
+    100% {
+        text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.5);
+    }
+}
