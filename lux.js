@@ -347,7 +347,7 @@ document.addEventListener ('click', (event) => {
         lastClick = {x: cursor.x + 15, y: cursor.y + 15};
         // check if must die
         if (randDead(player.percent) == true) {
-            sceene.start = false; player.alive = false;
+            sceene.start = false; player.alive = false; player.moving = false; player.speed = 0;
         }
         player.percent--;
     }
