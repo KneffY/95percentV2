@@ -264,7 +264,7 @@ let lifeRestart = (r) => {
 
 // EVENTS ###################################################################################
 
-// initialize player
+// initialize game
 document.addEventListener ('keyup', event => {
     // place player on centre and give it color
     mainScreen = {
@@ -273,6 +273,29 @@ document.addEventListener ('keyup', event => {
     if (event.code === 'Space' && player.initialized == false && sceene.start == false) {
         sceene.start = true; // tells to the game that it can begin
         player.initialize (mainScreen.x, mainScreen.y);
+    }
+})
+
+// restart game
+document.addEventListener ('keyup', event => {
+    // place player on centre and give it color
+    mainScreen = {
+        x: window.innerWidth / 2, y: window.innerHeight / 2
+    }
+    if (event.code === 'KeyR' && sceene.start == false) {
+        sceene.start = true; // tells to the game that it can begin
+        player.initialize (mainScreen.x, mainScreen.y);
+        player.score = 0; player.percent = 100;
+        for (let j = 0; j < enemies.length; j++) {
+            enemies[j].alive = false; enemies[j].checkState();
+        }
+    }
+})
+
+// pause game
+document.addEventListener ('keyup', (event) => {
+    if (event.code === 'KeyP') {
+        sceene.start == true ? sceene.start = false : sceene.start = true;
     }
 })
 
@@ -356,6 +379,8 @@ setInterval(() => {
                 if (inRad (player.x, player.y, enemies[i].x, enemies[i].y, 15)) { // 15 to be generous
                     player.alive = false; 
                     sceene.start = false;
+                    player.speed = 0;
+                    player.moving = false;
                 }
                 
             } else {
