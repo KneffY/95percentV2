@@ -5,6 +5,10 @@ let ui = {
     chances: document.getElementById ('chances'),
 }
 
+let pause = document.getElementById ('pause');
+let gameOver = document.getElementById ('gameOver');
+let rPop = document.getElementById ('r');
+
 let life = {
     DOM: document.getElementById ('life'),
     x: 0,
@@ -312,9 +316,12 @@ document.addEventListener ('keyup', (event) => {
         if (sceene.start == true && player.alive == true) {
             sceene.start = false;
             console.log('set pause');
+            // set pasue interface
+            pause.style.display = 'flex';
         } else if (sceene.start == false && player.alive == true) {
             sceene.start = true;
             console.log('quit pause');
+            pause.style.display = 'none';
         } else if (player.alive == false) {
             // nothing should happen
             console.log('nothing');
@@ -466,5 +473,13 @@ setInterval(() => {
     // set interface showing values
     ui.chances.innerText = player.percent;
     ui.score.innerText = player.score;
+
+    // set game over interface
+    if (player.alive == true) {
+        gameOver.style.display = 'none'; rPop.style.display = 'none';
+    } else {
+        gameOver.style.display = 'flex'; rPop.style.display = 'flex';
+    }
+    // player.alive == true ? gameOver.style.display = 'none' : gameOver.style.display = 'flex';
 
 },20) // 50 FPS, or every 20ms

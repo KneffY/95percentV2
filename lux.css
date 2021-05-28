@@ -76,6 +76,43 @@ body {
     color: white;
 }
 
+/* POP UPS######################################################################### */
+#pause, #gameOver {
+    z-index: 3;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 90px;
+    /* animation: instructionsBorder 1s linear infinite; */
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+#r {
+    z-index: 4;
+    width: 150px;
+    height: 150px;
+    position: absolute;
+    left: 150px;
+    margin-top: auto;
+    margin-bottom: auto;
+    /* background-color: rgba(64, 209, 202, 0.5); */
+    color: rgba(255, 255, 255, 0.8);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 130px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 50%;
+    animation: restart 1.5s linear infinite;
+}
+
 /* INSTRUCTIONS################################################################## */
 #instructions {
     margin-left: 50px;
@@ -314,5 +351,32 @@ body {
     }
     100% {
         box-shadow: 3px 0px 4px rgba(0, 255, 255, 0.5);
+    }
+}
+
+@keyframes restart {
+    0% {
+        border: none;
+        left: 150px;
+        border: 0px solid rgba(0, 0, 0, 0.8);
+    }
+    20% {
+        border: 5px solid rgba(255, 255, 255, 0.8);
+    }
+    40% {
+        border: 2px solid rgba(255, 255, 255, 0.8);
+        width: 200px;
+        height: 200px;
+        left: 125px;
+    }
+    80% {
+        border: 1px solid rgba(255, 255, 255, 0.8);
+    }
+    100% {
+        border: none;
+        width: 220px;
+        height: 220px;
+        left: 115px;
+        border: 0px solid rgba(0, 0, 0, 0.8);
     }
 }
