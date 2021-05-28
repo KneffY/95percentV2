@@ -181,6 +181,7 @@ class Enemy {
 
 // enemies speed to diff
 let enemiesSpeed = 1.5;
+let enemiesAcelerated = false; // to chack if speed was already rised
 
 // sceene elelemt
 let sceene = {
@@ -267,8 +268,10 @@ let lifeRestart = (r) => {
 
 // check difficulty
 let diffCheck = (score) => {
-    if (score % 20 == 0 && player.score != 0) {
-        enemiesSpeed += 0.25;
+    if (score % 20 == 0 && player.score != 0 && enemiesAcelerated == false) {
+        enemiesSpeed += 0.25; enemiesAcelerated = true;
+    } else if (score % 20 != 0 && player.score > 20) {
+        enemiesAcelerated = false;
     }
 }
 
