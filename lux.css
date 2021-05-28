@@ -80,7 +80,9 @@ body {
 #instructions {
     margin-left: 50px;
     position: absolute;
-    height: 40vh;
+    /* height: 40vh; */
+    padding-top: 20px;
+    padding-bottom: 20px;
     width: 330px;
     z-index: 2;
     /* background-color:rgba(0, 255, 255, 0.7); */
