@@ -5,9 +5,13 @@ let ui = {
     chances: document.getElementById ('chances'),
 }
 
+// useful last minute variables
 let pause = document.getElementById ('pause');
 let gameOver = document.getElementById ('gameOver');
 let rPop = document.getElementById ('r');
+let dPop = document.getElementById ('d');
+let scorePop = document.getElementById ('gameOverScore');
+let scorePopVal = 0;
 
 let life = {
     DOM: document.getElementById ('life'),
@@ -89,6 +93,7 @@ let player = {
         player.setPosition(cenX, cenY); 
         player.setColor("white");
         player.setAnimation ('playerShadows 1.5s linear infinite');
+        scorePopVal = 0;
         player.initialized = true;
     }
 }
@@ -302,7 +307,7 @@ document.addEventListener ('keyup', event => {
     if (event.code === 'KeyR' && sceene.start == false) {
         sceene.start = true; // tells to the game that it can begin
         player.initialize (mainScreen.x, mainScreen.y); player.alive = true;
-        player.score = 0; player.percent = 100;
+        player.score = 0; player.percent = 100; scorePopVal = 0;
         for (let j = 0; j < enemies.length; j++) {
             enemies[j].alive = false; enemies[j].checkState();
         }
@@ -312,16 +317,18 @@ document.addEventListener ('keyup', event => {
 
 // pause game
 document.addEventListener ('keyup', (event) => {
-    if (event.code === 'KeyP') {
+    if (event.code === 'KeyD') {
         if (sceene.start == true && player.alive == true) {
             sceene.start = false;
             console.log('set pause');
+            dPop.style.display = 'flex';
             // set pasue interface
             pause.style.display = 'flex';
         } else if (sceene.start == false && player.alive == true) {
             sceene.start = true;
             console.log('quit pause');
             pause.style.display = 'none';
+            dPop.style.display = 'none';
         } else if (player.alive == false) {
             // nothing should happen
             console.log('nothing');
@@ -473,12 +480,16 @@ setInterval(() => {
     // set interface showing values
     ui.chances.innerText = player.percent;
     ui.score.innerText = player.score;
+    scorePop.innerText = scorePopVal + ' pts';
 
     // set game over interface
+    if (player.score != 0) {
+        scorePopVal = player.score;
+    }
     if (player.alive == true) {
-        gameOver.style.display = 'none'; rPop.style.display = 'none';
+        gameOver.style.display = 'none'; rPop.style.display = 'none'; scorePop.style.display = 'none'; 
     } else {
-        gameOver.style.display = 'flex'; rPop.style.display = 'flex';
+        gameOver.style.display = 'flex'; rPop.style.display = 'flex'; scorePop.style.display = 'flex'; 
     }
     // player.alive == true ? gameOver.style.display = 'none' : gameOver.style.display = 'flex';
 
