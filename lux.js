@@ -302,6 +302,7 @@ document.addEventListener ('keyup', event => {
         for (let j = 0; j < enemies.length; j++) {
             enemies[j].alive = false; enemies[j].checkState();
         }
+        enemiesSpeed = 1.5;
     }
 })
 
@@ -369,7 +370,7 @@ document.addEventListener ('click', (event) => {
         lastClick = {x: cursor.x + 15, y: cursor.y + 15};
         // check if must die
         if (randDead(player.percent) == true) {
-            sceene.start = false; player.alive = false; player.moving = false; player.speed = 0;
+            sceene.start = false; player.alive = false; player.moving = false; player.speed = 0; enemiesSpeed = 1.5;
         }
         player.percent--;
     }
@@ -403,6 +404,7 @@ setInterval(() => {
                     sceene.start = false;
                     player.speed = 0;
                     player.moving = false;
+                    enemiesSpeed = 1.5;
                 }
                 
             } else {
