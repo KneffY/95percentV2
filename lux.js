@@ -9,7 +9,7 @@ let life = {
     DOM: document.getElementById ('life'),
     x: 0,
     y: 0,
-    size: 30,
+    size: 20,
     setPosition: (x, y) => {
         life.DOM.style.left = (x - life.size/2) + "px"; life.x = x;
         life.DOM.style.top = (y - life.size/2) + "px"; life.y = y;
@@ -76,12 +76,12 @@ let player = {
     },
     move: (vec) => {
         let mod = (vec[0]**2 + vec[1]**2)**(0.5); let uni = [(vec[0]/mod),(vec[1]/mod)]; 
-        if (inRad(mainScreen.x, mainScreen.y, player.x + uni[0]*player.speed, player.y - uni[1]*player.speed, 260)) {
+        if (inRad(mainScreen.x, mainScreen.y, player.x + uni[0]*player.speed, player.y - uni[1]*player.speed, 235)) {
             player.setPosition(player.x + uni[0]*player.speed, player.y - uni[1]*player.speed);
         }
     },
     initialize: (cenX, cenY) => {
-        player.setSize(50);
+        player.setSize(40);
         player.setPosition(cenX, cenY); 
         player.setColor("white");
         player.setAnimation ('playerShadows 1.5s linear infinite');
@@ -94,7 +94,7 @@ let bullet = {
     DOM: document.getElementById ('bullet'),
     x: 0,
     y: 0,
-    size: 30,
+    size: 20,
     moving: false,
     speed: 0,
     color: '',
@@ -159,7 +159,7 @@ class Enemy {
         newEnemy.classList.add('fas'); newEnemy.classList.add('fa-greater-than'); newEnemy.classList.add('enemy');
         document.body.appendChild(newEnemy);
         this.DOM = newEnemy;
-        this.setSize (30); this.setColor ('white');
+        this.setSize (25); this.setColor ('white');
         let factor = Math.floor((Math.random() * 100) + 1);
         let ang = (Math.PI*2*factor)/100; // rad
         this.setPosition (Math.cos (ang)*r + cenX, Math.sin (ang)*r + cenY);
@@ -172,12 +172,15 @@ class Enemy {
     }
     checkState () {
         if (this.alive == true) {
-            this.setSize (30); this.setColor ('white'); this.setAnimation ('playerShadows 0.5s linear infinite');
+            this.setSize (25); this.setColor ('white'); this.setAnimation ('playerShadows 0.5s linear infinite');
         } else {
             this.setSize (0); this.setColor ('black'); this.setAnimation (''); this.speed = 0;
         }
     }
 }
+
+// enemies speed to diff
+let enemiesSpeed = 1.5;
 
 // sceene elelemt
 let sceene = {
@@ -259,6 +262,13 @@ let lifeRestart = (r) => {
     life.setPosition (x, y)
     if (sceene.start == true) {
         player.score++; player.percent = 100;
+    }
+}
+
+// check difficulty
+let diffCheck = (score) => {
+    if (score % 20 == 0 && player.score != 0) {
+        enemiesSpeed += 0.25;
     }
 }
 
@@ -352,7 +362,7 @@ document.addEventListener ('mousemove', (event) => {
 document.addEventListener ('click', (event) => {
     if (sceene.start == true) {
         // shooting activated
-        bullet.setPosition(player.x, player.y); bullet.moving = true; bullet.speed = 20;
+        bullet.setPosition(player.x, player.y); bullet.moving = true; bullet.speed = 25;
         lastClick = {x: cursor.x + 15, y: cursor.y + 15};
         // check if must die
         if (randDead(player.percent) == true) {
@@ -368,7 +378,7 @@ setInterval(() => {
     // create enemies every second is gane strated
     if (sceene.time % 50 == 0 && sceene.start == true) { // one per second seems better...
         let newEnemy = new Enemy ();
-        newEnemy.initialize (mainScreen.x, mainScreen.y, 325);
+        newEnemy.initialize (mainScreen.x, mainScreen.y, 275);
         enemies.push (newEnemy); //it wooooorks!!!!!!!!!!!!!!!!!
     }
     // move enemies
@@ -377,15 +387,15 @@ setInterval(() => {
             enemies[i].checkState();
             if (enemies[i].alive == true) {
                 let eVec = vecTo (enemies[i].x, enemies[i].y, player.x, player. y);
-                if (inRad(mainScreen.x, mainScreen.y, enemies[i].x, enemies[i].y, 260)) {
-                    enemies[i].speed = 1.5;
+                if (inRad(mainScreen.x, mainScreen.y, enemies[i].x, enemies[i].y, 235)) {
+                    enemies[i].speed = enemiesSpeed;
                     enemies[i].move (eVec);
                 } else {
                     enemies[i].speed = 0.5;
                     enemies[i].move (eVec);
                 }
                 // check for losing collition
-                if (inRad (player.x, player.y, enemies[i].x, enemies[i].y, 15)) { // 15 to be generous
+                if (inRad (player.x, player.y, enemies[i].x, enemies[i].y, 10)) { // 15 to be generous
                     player.alive = false; 
                     sceene.start = false;
                     player.speed = 0;
@@ -424,13 +434,13 @@ setInterval(() => {
                 player.brakes = false;
             }
             player.move (lastD); 
-            player.speed -= player.aceleration;
+            player.speed -= player.aceleration/2.35;
             player.moving = false;
         }
     }
     // check for life restart
-    if (inRad (player.x, player.y, life.x, life.y, 30)) {
-        lifeRestart (250);
+    if (inRad (player.x, player.y, life.x, life.y, 25)) {
+        lifeRestart (225);
     }
 
     // move bullet
@@ -440,10 +450,13 @@ setInterval(() => {
     if (bullet.moving == true) {
         bullet.move (bVec);
     }
-    if (inRad(mainScreen.x, mainScreen.y, bullet.x, bullet.y, 325) == false) {
+    if (inRad(mainScreen.x, mainScreen.y, bullet.x, bullet.y, 275) == false) {
         bullet.moving = false; bullet.setColors(); bullet.speed = 0; 
         bullet.setPosition(0, 0);
     }
+
+    // increase difficulty
+    diffCheck (player.score);
 
     // set interface showing values
     ui.chances.innerText = player.percent;
