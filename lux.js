@@ -390,9 +390,9 @@ setInterval(() => {
             if (inRad(enemies[i].x, enemies[i].y, bullet.x, bullet.y, 20)) {
                 // bullet sentences
                 bullet.moving = false; bullet.setColors(); bullet.speed = 0; 
-                bullet.setPosition(0, 0);
+                bullet.setPosition(0, 0); 
                 // enemy sentences
-                enemies[i].alive = false;
+                enemies[i].alive = false; 
             }
         }
     }
