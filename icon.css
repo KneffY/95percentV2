@@ -34,7 +34,7 @@ body {
     width: 350px;
     height: 350px;
     border-radius: 50%;
-    border: 5px solid white;
+    border: 15px solid white;
 }
 .color {
     position: absolute;
@@ -46,16 +46,16 @@ body {
 /* PLAYER########################################################################## */
 #player {
     position: absolute;
-    font-size: 150px;
+    font-size: 160px;
     animation:playerShadows 1.5s linear infinite;
     color: white;
 }
 #player_core {
     position: absolute;
-    font-size: 140px;
+    font-size: 130px;
     color: black;
-    top: 5px;
-    left: 5px;
+    top: 15px;
+    left: 15px;
 }
 
 /* SHADOWS################################################################################## */
@@ -98,69 +98,69 @@ body {
 
 @keyframes cyanTwinkle {
     0% {
-        --cyan--twinkle: 3px;
+        --cyan--twinkle: 10px;
     }
     25% {
-        --cyan--twinkle: 3.5px;
+        --cyan--twinkle: 15px;
     }
     50% {
-        --cyan--twinkle: 2.5px;
+        --cyan--twinkle: 7px;
     }
     75% {
-        --cyan--twinkle: 3.25px;
+        --cyan--twinkle: 13px;
     }
     100% {
-        --cyan--twinkle: 3px;
+        --cyan--twinkle: 10px;
     }
 }
 
 @keyframes magentaTwinkle {
     0% {
-        --magenta--twinkle: 3px;
+        --magenta--twinkle: 10px;
     }
     25% {
-        --magenta--twinkle: 3.5px;
+        --magenta--twinkle: 15px;
     }
     50% {
-        --magenta--twinkle: 2.5px;
+        --magenta--twinkle: 7px;
     }
     75% {
-        --magenta--twinkle: 3.25px;
+        --magenta--twinkle: 13px;
     }
     100% {
-        --magenta--twinkle: 3px;
+        --magenta--twinkle: 10px;
     }
 }
 
 @keyframes yellowTwinkle {
     0% {
-        --yellow--twinkle: 3px;
+        --yellow--twinkle: 10px;
     }
     25% {
-        --yellow--twinkle: 3.5px;
+        --yellow--twinkle: 15px;
     }
     50% {
-        --yellow--twinkle: 2.5px;
+        --yellow--twinkle: 7px;
     }
     75% {
-        --yellow--twinkle: 3.25px;
+        --yellow--twinkle: 13px;
     }
     100% {
-        --yellow--twinkle: 3px;
+        --yellow--twinkle: 10px;
     }
 }
 
 @keyframes playerShadows {
     0% {
-        text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.7);
+        text-shadow: 0px 0px 20px rgba(0, 255, 255, 0.7);
     } 
     33% {
-        text-shadow: 0px 0px 10px rgba(255, 0, 255, 0.7);
+        text-shadow: 0px 0px 20px rgba(255, 0, 255, 0.7);
     }
     66% {
-        text-shadow: 0px 0px 10px rgba(255, 255, 0, 0.7);
+        text-shadow: 0px 0px 20px rgba(255, 255, 0, 0.7);
     }
     100% {
-        text-shadow: 0px 0px 10px rgba(0, 255, 255, 0.7);
+        text-shadow: 0px 0px 20px rgba(0, 255, 255, 0.7);
     }
 }
