@@ -284,7 +284,7 @@ document.addEventListener ('keyup', event => {
     }
     if (event.code === 'KeyR' && sceene.start == false) {
         sceene.start = true; // tells to the game that it can begin
-        player.initialize (mainScreen.x, mainScreen.y);
+        player.initialize (mainScreen.x, mainScreen.y); player.alive = true;
         player.score = 0; player.percent = 100;
         for (let j = 0; j < enemies.length; j++) {
             enemies[j].alive = false; enemies[j].checkState();
@@ -295,7 +295,16 @@ document.addEventListener ('keyup', event => {
 // pause game
 document.addEventListener ('keyup', (event) => {
     if (event.code === 'KeyP') {
-        sceene.start == true ? sceene.start = false : sceene.start = true;
+        if (sceene.start == true && player.alive == true) {
+            sceene.start = false;
+            console.log('set pause');
+        } else if (sceene.start == false && player.alive == true) {
+            sceene.start = true;
+            console.log('quit pause');
+        } else if (player.alive == false) {
+            // nothing should happen
+            console.log('nothing');
+        }
     }
 })
 
