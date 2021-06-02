@@ -195,6 +195,7 @@ let enemiesAcelerated = false; // to chack if speed was already rised
 // sceene elelemt
 let sceene = {
     start: false,
+    pause: false,
     score: 0,
     percent: 100,
     time: 0, // +1 each 1/50s
@@ -304,7 +305,7 @@ document.addEventListener ('keyup', event => {
     mainScreen = {
         x: window.innerWidth / 2, y: window.innerHeight / 2
     }
-    if (event.code === 'KeyR' && sceene.start == false) {
+    if (event.code === 'KeyR' && sceene.start == false && sceene.pause == false) {
         sceene.start = true; // tells to the game that it can begin
         player.initialize (mainScreen.x, mainScreen.y); player.alive = true;
         player.score = 0; player.percent = 100; scorePopVal = 0;
@@ -319,13 +320,13 @@ document.addEventListener ('keyup', event => {
 document.addEventListener ('keyup', (event) => {
     if (event.code === 'KeyD') {
         if (sceene.start == true && player.alive == true) {
-            sceene.start = false;
+            sceene.start = false; sceene.pause = true;
             console.log('set pause');
             dPop.style.display = 'flex';
             // set pasue interface
             pause.style.display = 'flex';
         } else if (sceene.start == false && player.alive == true) {
-            sceene.start = true;
+            sceene.start = true; sceene.pause = false;
             console.log('quit pause');
             pause.style.display = 'none';
             dPop.style.display = 'none';
